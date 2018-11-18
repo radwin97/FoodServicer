@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="Implementations\" />
+    <Folder Include="Interfaces\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\FoodServicer.Common\FoodServicer.Common.csproj" />
+    <ProjectReference Include="..\FoodServicer.Model\FoodServicer.Model.csproj" />
+    <ProjectReference Include="..\FoodServicer.Repository\FoodServicer.Repository.csproj" />
+  </ItemGroup>
+
+</Project>
