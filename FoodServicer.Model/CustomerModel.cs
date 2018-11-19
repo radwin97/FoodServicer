@@ -72,7 +72,7 @@ namespace FoodServicer.Model
         public long? ContactPhoneId { get; set; }
         public long? ContactEmailId { get; set; }
 
-        public OrderStatusModel OrderStatus { get; set; }
+        public OrderStatusModel Status { get; set; }
         public ICollection<OrderItemModel> OrderItems { get; set; }
     }
 

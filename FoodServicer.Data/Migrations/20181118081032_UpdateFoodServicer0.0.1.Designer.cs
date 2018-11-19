@@ -3,14 +3,16 @@ using System;
 using FoodServicer.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace FoodServicer.Data.Migrations
 {
     [DbContext(typeof(FoodServicerContext))]
-    partial class FoodServicerContextModelSnapshot : ModelSnapshot
+    [Migration("20181118081032_UpdateFoodServicer0.0.1")]
+    partial class UpdateFoodServicer001
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -26,7 +28,7 @@ namespace FoodServicer.Data.Migrations
 
                     b.Property<string>("City");
 
-                    b.Property<long>("CustomerId");
+                    b.Property<long?>("CustomerId");
 
                     b.Property<bool>("IsPrimary");
 
@@ -104,7 +106,7 @@ namespace FoodServicer.Data.Migrations
 
                     b.Property<string>("Address");
 
-                    b.Property<long>("CustomerId");
+                    b.Property<long?>("CustomerId");
 
                     b.Property<long>("EmailAddressTypeId");
 
@@ -276,7 +278,7 @@ namespace FoodServicer.Data.Migrations
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<long>("CustomerId");
+                    b.Property<long?>("CustomerId");
 
                     b.Property<bool>("IsPrimary");
 
@@ -312,10 +314,9 @@ namespace FoodServicer.Data.Migrations
                         .HasForeignKey("AddressTypeId")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("FoodServicer.Data.Entities.Customer", "Customer")
+                    b.HasOne("FoodServicer.Data.Entities.Customer")
                         .WithMany("Addresses")
-                        .HasForeignKey("CustomerId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("CustomerId");
                 });
 
             modelBuilder.Entity("FoodServicer.Data.Entities.Conversion", b =>
@@ -333,10 +334,9 @@ namespace FoodServicer.Data.Migrations
 
             modelBuilder.Entity("FoodServicer.Data.Entities.EmailAddress", b =>
                 {
-                    b.HasOne("FoodServicer.Data.Entities.Customer", "Customer")
+                    b.HasOne("FoodServicer.Data.Entities.Customer")
                         .WithMany("EmailAddresses")
-                        .HasForeignKey("CustomerId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("CustomerId");
 
                     b.HasOne("FoodServicer.Data.Entities.EmailAddressType", "Type")
                         .WithMany()
@@ -402,10 +402,9 @@ namespace FoodServicer.Data.Migrations
 
             modelBuilder.Entity("FoodServicer.Data.Entities.PhoneNumber", b =>
                 {
-                    b.HasOne("FoodServicer.Data.Entities.Customer", "Customer")
+                    b.HasOne("FoodServicer.Data.Entities.Customer")
                         .WithMany("PhoneNumbers")
-                        .HasForeignKey("CustomerId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("CustomerId");
 
                     b.HasOne("FoodServicer.Data.Entities.PhoneNumberType", "Type")
                         .WithMany()

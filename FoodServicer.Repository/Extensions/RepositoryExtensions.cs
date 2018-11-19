@@ -35,10 +35,10 @@ namespace FoodServicer.Repository.Extensions
                     model.PhoneNumbers = domain.PhoneNumbers.Select(x => x.ToModel()).ToList();
                 }
 
-                //if(!isSummary && domain.Orders != null && domain.Orders.Any())
-                //{
-                //    model.Orders = domain.Orders.Select(x => x.ToModel()).ToList();
-                //}
+                if (!isSummary && domain.Orders != null && domain.Orders.Any())
+                {
+                    model.Orders = domain.Orders.Select(x => x.ToModel()).ToList();
+                }
             }
 
             return model;
@@ -144,7 +144,81 @@ namespace FoodServicer.Repository.Extensions
             return model;
         }
 
-        //TODO: Add Orders Extensions
+        public static OrderModel ToModel(this Order domain, bool isSummary = false)
+        {
+            var model = new OrderModel();
+
+            if(domain != null)
+            {
+                model.Id = domain.Id;
+                model.MenuId = domain.MenuId;
+                model.CustomerId = domain.CustomerId;
+                model.DeliveryAddressId = domain.DeliveryAddressId;
+                model.ContactEmailId = domain.ContactEmailId;
+                model.ContactPhoneId = domain.ContactPhoneId;
+
+                if (domain.Status != null)
+                {
+                    model.Status = domain.Status.ToModel();
+                }
+
+                if(!isSummary && domain.OrderItems != null && domain.OrderItems.Any())
+                {
+                    model.OrderItems = domain.OrderItems
+                        .Select(x => x.ToModel())
+                        .ToList();
+                }
+            }
+
+            return model;
+        }
+
+        public static OrderStatusModel ToModel(this OrderStatus domain)
+        {
+            var model = new OrderStatusModel();
+
+            if(domain != null)
+            {
+                model.Id = domain.Id;
+                model.Status = domain.Status;
+            }
+
+            return model;
+        }
+
+        public static OrderItemModel ToModel(this OrderItem domain)
+        {
+            var model = new OrderItemModel();
+
+            if(domain != null)
+            {
+                model.Id = domain.Id;
+                model.SpecialInstructions = domain.SpecialInstructions;
+
+                if(domain.MenuItem != null)
+                {
+                    model.MenuItem = domain.MenuItem.ToModel();
+                }
+            }
+
+            return model;
+        }
+
+        public static MenuItemModel ToModel(this MenuItem domain)
+        {
+            var model = new MenuItemModel();
+
+            if(domain != null)
+            {
+                model.Id = domain.Id;
+                model.MealId = domain.MealId;
+                model.MenuId = domain.MenuId;
+                model.Price = domain.Price;
+                model.Cost = domain.Cost;
+            }
+
+            return model;
+        }
 
         #endregion
 
@@ -177,10 +251,10 @@ namespace FoodServicer.Repository.Extensions
                     domain.PhoneNumbers = model.PhoneNumbers.Select(x => x.ToDomain()).ToList();
                 }
 
-                //if (model.Orders != null && model.Orders.Any())
-                //{
-                //    domain.Orders = model.Orders.Select(x => x.ToDomain()).ToList();
-                //}
+                if (model.Orders != null && model.Orders.Any())
+                {
+                    domain.Orders = model.Orders.Select(x => x.ToDomain()).ToList();
+                }
             }
 
             return domain;
@@ -286,6 +360,82 @@ namespace FoodServicer.Repository.Extensions
             return domain;
         }
 
+        public static Order ToDomain(this OrderModel model)
+        {
+            var domain = new Order();
+
+            if (model != null)
+            {
+                domain.Id = model.Id;
+                domain.MenuId = model.MenuId;
+                domain.CustomerId = model.CustomerId;
+                domain.DeliveryAddressId = model.DeliveryAddressId;
+                domain.ContactEmailId = model.ContactEmailId;
+                domain.ContactPhoneId = model.ContactPhoneId;
+
+                if (model.Status != null)
+                {
+                    domain.Status = model.Status.ToDomain();
+                }
+
+                if (model.OrderItems != null && model.OrderItems.Any())
+                {
+                    domain.OrderItems = model.OrderItems
+                        .Select(x => x.ToDomain())
+                        .ToList();
+                }
+            }
+
+            return domain;
+        }
+
+        public static OrderStatus ToDomain(this OrderStatusModel model)
+        {
+            var domain = new OrderStatus();
+
+            if (model != null)
+            {
+                domain.Id = model.Id;
+                domain.Status = model.Status;
+            }
+
+            return domain;
+        }
+
+        public static OrderItem ToDomain(this OrderItemModel model)
+        {
+            var domain = new OrderItem();
+
+            if (model != null)
+            {
+                domain.Id = model.Id;
+                domain.SpecialInstructions = model.SpecialInstructions;
+
+                if (model.MenuItem != null)
+                {
+                    domain.MenuItem = model.MenuItem.ToDomain();
+                }
+            }
+
+            return domain;
+        }
+
+        public static MenuItem ToDomain(this MenuItemModel model)
+        {
+            var domain = new MenuItem();
+
+            if (model != null)
+            {
+                domain.Id = model.Id;
+                domain.MealId = model.MealId;
+                domain.MenuId = model.MenuId;
+                domain.Price = model.Price;
+                domain.Cost = model.Cost;
+            }
+
+            return domain;
+        }
+
         #endregion
 
         #region ToDomains - Update
@@ -335,10 +485,10 @@ namespace FoodServicer.Repository.Extensions
                 domain.State = model.State;
                 domain.PostalCode = model.PostalCode;
                 domain.IsPrimary = model.IsPrimary;
-
+                
                 if (model.Type != null)
                 {
-                    domain.Type = model.Type.ToDomain(domain.Type);
+                    domain.AddressTypeId = model.Type.Id;
                 }
             }
 
@@ -366,7 +516,7 @@ namespace FoodServicer.Repository.Extensions
 
                 if (model.Type != null)
                 {
-                    domain.Type = model.Type.ToDomain(domain.Type);
+                    domain.Type.Id = model.Type.Id;
                 }
             }
 
@@ -394,7 +544,7 @@ namespace FoodServicer.Repository.Extensions
 
                 if (model.Type != null)
                 {
-                    domain.Type = model.Type.ToDomain(domain.Type);
+                    domain.Type.Id = model.Type.Id;
                 }
             }
 
@@ -407,6 +557,74 @@ namespace FoodServicer.Repository.Extensions
             {
                 domain.Id = model.Id;
                 domain.Type = model.Type;
+            }
+
+            return domain;
+        }
+
+        public static Order ToDomain(this OrderModel model, Order domain)
+        {
+            if (model != null)
+            {
+                domain.Id = model.Id;
+                domain.MenuId = model.MenuId;
+                domain.CustomerId = model.CustomerId;
+                domain.DeliveryAddressId = model.DeliveryAddressId;
+                domain.ContactEmailId = model.ContactEmailId;
+                domain.ContactPhoneId = model.ContactPhoneId;
+
+                if (model.Status != null)
+                {
+                    domain.Status.Id = model.Status.Id;
+                }
+
+                //if (model.OrderItems != null && model.OrderItems.Any())
+                //{
+                //    domain.OrderItems = model.OrderItems
+                //        .Select(x => x.ToDomain())
+                //        .ToList();
+                //}
+            }
+
+            return domain;
+        }
+
+        public static OrderStatus ToDomain(this OrderStatusModel model, OrderStatus domain)
+        {
+            if (model != null)
+            {
+                domain.Id = model.Id;
+                domain.Status = model.Status;
+            }
+
+            return domain;
+        }
+
+        public static OrderItem ToDomain(this OrderItemModel model, OrderItem domain)
+        {
+            if (model != null)
+            {
+                domain.Id = model.Id;
+                domain.SpecialInstructions = model.SpecialInstructions;
+
+                if (model.MenuItem != null)
+                {
+                    domain.MenuItem.Id = model.MenuItem.Id;
+                }
+            }
+
+            return domain;
+        }
+
+        public static MenuItem ToDomain(this MenuItemModel model, MenuItem domain)
+        {
+            if (model != null)
+            {
+                domain.Id = model.Id;
+                domain.MealId = model.MealId;
+                domain.MenuId = model.MenuId;
+                domain.Price = model.Price;
+                domain.Cost = model.Cost;
             }
 
             return domain;

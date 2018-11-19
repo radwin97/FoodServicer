@@ -8,5 +8,8 @@
 
         public long EmailAddressTypeId { get; set; }
         public EmailAddressType Type { get; set; }
+
+        public long CustomerId { get; set; }
+        public Customer Customer { get; set; }
     }
 }

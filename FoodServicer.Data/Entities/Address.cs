@@ -9,7 +9,11 @@
         public string State { get; set; }
         public string PostalCode { get; set; }
         public bool IsPrimary { get; set; }
+
         public long AddressTypeId { get; set; }
         public AddressType Type { get; set; }
+
+        public long CustomerId { get; set; }
+        public Customer Customer { get; set; }
     }
 }
