@@ -18,6 +18,7 @@
     <ProjectReference Include="..\FoodServicer.IoC\FoodServicer.IoC.csproj" />
     <ProjectReference Include="..\FoodServicer.Library\FoodServicer.Library.csproj" />
     <ProjectReference Include="..\FoodServicer.Model\FoodServicer.Model.csproj" />
+    <ProjectReference Include="..\FoodServicer.ViewModel\FoodServicer.ViewModel.csproj" />
   </ItemGroup>
 
 </Project>

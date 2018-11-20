@@ -5,14 +5,10 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Implementations\" />
-    <Folder Include="Interfaces\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\FoodServicer.Common\FoodServicer.Common.csproj" />
     <ProjectReference Include="..\FoodServicer.Model\FoodServicer.Model.csproj" />
     <ProjectReference Include="..\FoodServicer.Repository\FoodServicer.Repository.csproj" />
+    <ProjectReference Include="..\FoodServicer.ViewModel\FoodServicer.ViewModel.csproj" />
   </ItemGroup>
 
 </Project>

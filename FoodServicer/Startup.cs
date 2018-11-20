@@ -1,13 +1,10 @@
-﻿using System;
-using FoodServicer.Data;
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.EntityFrameworkCore;
-using Pomelo.EntityFrameworkCore.MySql.Infrastructure;
+using FoodServicer.IoC;
 
 namespace FoodServicer
 {
@@ -30,6 +27,7 @@ namespace FoodServicer
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
+            new IocBindngs().Bind(services);
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
             //services.AddDbContextPool<FoodServicerContext>( 
