@@ -1,4 +1,6 @@
-﻿namespace FoodServicer.ViewModel
+﻿using System.Text;
+
+namespace FoodServicer.ViewModel
 {
     public class CustomerTableViewModel
     {
@@ -10,5 +12,35 @@
         public string PrimaryEmailAddress { get; set; }
         public string PrimaryAddress { get; set; }
         public string PrimaryPhoneNumber { get; set; }
+
+        public string FullName
+        {
+            get
+            {
+                var sb = new StringBuilder();
+
+                if (!string.IsNullOrEmpty(FirstName))
+                {
+                    sb.AppendFormat("{0} ", FirstName);
+                }
+
+                if (!string.IsNullOrEmpty(MiddleName))
+                {
+                    sb.AppendFormat("{0} ", MiddleName);
+                }
+
+                if (!string.IsNullOrEmpty(LastName))
+                {
+                    sb.AppendFormat("{0} ", LastName);
+                }
+
+                if (!string.IsNullOrEmpty(Suffix))
+                {
+                    sb.AppendFormat("{0} ", Suffix);
+                }
+
+                return sb.ToString().TrimEnd();
+            }
+        }
     }
 }

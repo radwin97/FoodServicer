@@ -17,7 +17,13 @@ namespace FoodServicer.Controllers
         [HttpGet]
         public IActionResult Index()
         {
-            return View(new CustomerSearchViewModel());
+            return RedirectToAction("Search");
+        }
+
+        [HttpGet]
+        public IActionResult Search()
+        {
+            return View("Index", new CustomerSearchViewModel());
         }
 
         [HttpPost]
@@ -27,19 +33,32 @@ namespace FoodServicer.Controllers
             return View("Index", viewModel);
         }
 
+        [HttpGet]
         public IActionResult Detail(long id)
         {
             return View();
         }
 
-
-        public IActionResult Update(long id)
+        [HttpGet]
+        public IActionResult Create()
         {
             return View();
         }
 
+        [HttpPost]
+        public IActionResult Create(CreateCustomerViewModel viewModel)
+        {
+            return View();
+        }
 
-        public IActionResult Insert(long id)
+        [HttpGet]
+        public IActionResult Edit(long id)
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult Edit(UpdateCustomerViewModel viewModel)
         {
             return View();
         }
